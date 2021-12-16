@@ -1,0 +1,11 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Zuj3brusu/Backend-Intermediate.git",
+  "author": "Pulkit Gaur",
+  "license": "MIT",
+  "dependencies": {
+    "ts-node": "^10.4.0"
+  }
+}
