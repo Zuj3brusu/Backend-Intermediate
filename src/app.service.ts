@@ -5,4 +5,8 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
+  
+  getEnvData() : string {
+    return process.env.DB_USER
+  }
 }
