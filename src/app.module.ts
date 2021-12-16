@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from './database/database.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -10,6 +12,8 @@ import { ConfigModule } from '@nestjs/config';
       typePaths: ['./**/*.graphql'],
   }),
   ConfigModule.forRoot(),
+  DatabaseModule,
+  UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
