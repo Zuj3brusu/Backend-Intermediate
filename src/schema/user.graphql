@@ -1,8 +1,10 @@
 type Query {
-  me: User
+  getUsers : [User]
 }
 
 type User {
-  Name: String
-  Email : String
+  firstName: String
+  lastName: String
+  email : String
+  password : String
 }
