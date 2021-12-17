@@ -3,6 +3,6 @@ type Query {
 }
 
 type User {
-  id: ID
-  name: String
+  Name: String
+  Email : String
 }
