@@ -24,7 +24,7 @@ export class AuthResolver {
 		const {email,password} = args
 		const user = await this.authService.validateUser(email,password)
 		if (user){
-			return {firstName:user.dataValues.firstName, lastName:user.dataValues.lastName}
+			return await this.authService.login(user)
 		}
 		else{
 			throw new UnauthorizedException();

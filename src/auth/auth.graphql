@@ -3,7 +3,7 @@ type Mutation {
 }
 
 type Query {
-  profile : AuthPayload!
+  profile : Profile!
 }
 
 schema {
@@ -11,6 +11,10 @@ schema {
 }
 
 type AuthPayload {
-    firstName: String!
-    lastName: String!
+  access_token : String!
+}
+
+type Profile {
+    firstName: String
+    lastName: String
 }
