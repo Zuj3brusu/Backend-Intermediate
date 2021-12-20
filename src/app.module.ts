@@ -12,7 +12,7 @@ import { AuthModule } from './auth/auth.module';
     GraphQLModule.forRoot({ 
       typePaths: ['./**/*.graphql'],
   }),
-  ConfigModule.forRoot(),
+  ConfigModule.forRoot({ isGlobal: true, }),
   DatabaseModule,
   UsersModule,
   AuthModule,
