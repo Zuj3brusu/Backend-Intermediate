@@ -12,5 +12,6 @@ import { DatabaseModule } from '../../database/database.module';
     UsersResolver,
     ...usersProviders,
   ],
+  exports: [UsersService],
 })
 export class UsersModule {}

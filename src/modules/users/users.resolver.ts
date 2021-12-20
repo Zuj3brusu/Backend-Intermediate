@@ -13,6 +13,12 @@ export class UsersResolver {
     return await this.usersService.findAll();
   }
 
+  @Query()
+  async getUserByEmail(obj, args, context, info) {
+    const { email } = args;
+    return await this.usersService.findOneByEmail(email);
+  }
+
   @Mutation('createUser')
   async create(obj, args: User, context, info): Promise<User> {
     const createdUser = await this.usersService.create(args);
