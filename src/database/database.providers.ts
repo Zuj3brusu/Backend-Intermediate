@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
+import { Post } from 'src/modules/posts/post.entity';
 import { User } from '../modules/users/user.entity';
 
 export const databaseProviders = [
@@ -13,7 +14,7 @@ export const databaseProviders = [
         port: parseInt(process.env.DB_PORT),
         dialect: 'postgres',
         });
-      sequelize.addModels([User]);
+      sequelize.addModels([User,Post]);
       await sequelize.sync();
       return sequelize;
     },

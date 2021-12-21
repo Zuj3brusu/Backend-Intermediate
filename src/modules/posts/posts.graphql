@@ -1,0 +1,14 @@
+type Query {
+  getPosts : [Post]
+}
+
+type Mutation {
+  createPost(
+    postContent: String,
+    ): Post
+}
+
+type Post {
+  postContent: String
+  creatorEmail: String
+}
