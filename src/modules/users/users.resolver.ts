@@ -3,7 +3,6 @@ import {Resolver, Query, ResolveField, Args, Parent, Mutation} from '@nestjs/gra
 import { UsersService } from './users.service';
 import { PostsService } from '../posts/posts.service';
 import { CurrentUser } from 'src/auth/auth.resolver';
-import { Post } from '../posts/post.entity';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/graphql-auth.guard';
 
@@ -30,6 +29,13 @@ export class UsersResolver {
   async getMyPosts(@CurrentUser() user: User) {
     const email = user.email
     return await this.postsService.findAllByEmail(email);
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Query()
+  async myPostCount(@CurrentUser() user: User) {
+    const email = user.email
+    return await this.postsService.postCount(email);
   }
 
   @Mutation('createUser')

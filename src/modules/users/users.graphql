@@ -2,6 +2,7 @@ type Query {
   getUsers : [User]
   getUserByEmail(email: String) : User
   getMyPosts : [Post]
+  myPostCount : Int
 }
 
 type Mutation {

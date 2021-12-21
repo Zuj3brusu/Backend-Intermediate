@@ -1,6 +1,7 @@
 type Query {
   getPosts : [Post]
   getPostsByUserKey(email: String) : [Post]
+  postCount(email: String) : Int
 }
 
 type Mutation {

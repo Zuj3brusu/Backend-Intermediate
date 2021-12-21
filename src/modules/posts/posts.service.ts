@@ -16,6 +16,10 @@ export class PostsService {
     async findAllByEmail(providedEmail: string): Promise<Post[]> {
         return this.postsRepository.findAll<Post>({where: {creatorEmail : providedEmail}});
     }
+
+    async postCount(providedEmail: string): Promise<number> {
+        return this.postsRepository.count<Post>({where: {creatorEmail : providedEmail}});
+    }
       
     async create(user: User, postContent: any): Promise<Post> {
         const post = new Post();

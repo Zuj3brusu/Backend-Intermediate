@@ -24,6 +24,12 @@ export class PostsResolver {
     return await this.postsService.findAllByEmail(email);
   }
 
+  @Query()
+  async postCount(obj, args, context, info) {
+    const { email } = args;
+    return await this.postsService.postCount(email);
+  }
+
   @UseGuards(GqlAuthGuard)
   @Mutation('createPost')
   async create(@CurrentUser() user: User, @Args('postContent') args: String): Promise<any> {
