@@ -17,18 +17,24 @@ export class UsersResolver {
 
   @Query()
   async getUsers() {
+    var cacheStartTime = performance.now()
     const value = await this.cacheManager.get('getUsers');
     if(value){
+      var cacheEndTime = performance.now()
       console.log({
-        data: value,
+        // data: value,
+        timeTaken: `${cacheEndTime - cacheStartTime} milliseconds`,
         loadsFrom: 'redis cache'
       })
       return value
     }else{
+      var dbStartTime = performance.now()
       const newValue = await this.usersService.findAll();
+      var dbEndTime = performance.now()
       await this.cacheManager.set('getUsers', newValue);
       console.log({
-        data: newValue,
+        // data: newValue,
+        timeTaken: `${dbEndTime - dbStartTime} milliseconds`,
         loadsFrom: 'database'
       })
       return newValue

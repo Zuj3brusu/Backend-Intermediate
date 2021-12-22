@@ -23,7 +23,8 @@ import * as redisStore from 'cache-manager-redis-store';
     isGlobal: true,
     store:redisStore,
     host: 'localhost',
-    port: 6379
+    port: 6379,
+    ttl: 600,
   })
   ],
   controllers: [AppController],
