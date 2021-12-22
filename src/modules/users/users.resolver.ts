@@ -44,21 +44,84 @@ export class UsersResolver {
   @Query()
   async getUserByEmail(obj, args, context, info) {
     const { email } = args;
-    return await this.usersService.findOneByEmail(email);
+    var cacheStartTime = performance.now()
+    const value = await this.cacheManager.get('getUserByEmail'+email);
+    if(value){
+      var cacheEndTime = performance.now()
+      console.log({
+        // data: value,
+        timeTaken: `${cacheEndTime - cacheStartTime} milliseconds`,
+        loadsFrom: 'redis cache'
+      })
+      return value
+    }else{
+      var dbStartTime = performance.now()
+      const newValue = await this.usersService.findOneByEmail(email);
+      var dbEndTime = performance.now()
+      await this.cacheManager.set('getUserByEmail'+email, newValue);
+      console.log({
+        // data: newValue,
+        timeTaken: `${dbEndTime - dbStartTime} milliseconds`,
+        loadsFrom: 'database'
+      })
+      return newValue
+    }
   }
 
   @UseGuards(GqlAuthGuard)
   @Query()
   async getMyPosts(@CurrentUser() user: User) {
+    var cacheStartTime = performance.now()
     const email = user.email
-    return await this.postsService.findAllByEmail(email);
+    const value = await this.cacheManager.get('getMyPosts'+email);
+    if(value){
+      var cacheEndTime = performance.now()
+      console.log({
+        // data: value,
+        timeTaken: `${cacheEndTime - cacheStartTime} milliseconds`,
+        loadsFrom: 'redis cache'
+      })
+      return value
+    }else{
+      var dbStartTime = performance.now()
+      const newValue = await this.postsService.findAllByEmail(email);
+      var dbEndTime = performance.now()
+      await this.cacheManager.set('getMyPosts'+email, newValue);
+      console.log({
+        // data: newValue,
+        timeTaken: `${dbEndTime - dbStartTime} milliseconds`,
+        loadsFrom: 'database'
+      })
+      return newValue
+    }
   }
 
   @UseGuards(GqlAuthGuard)
   @Query()
   async myPostCount(@CurrentUser() user: User) {
     const email = user.email
-    return await this.postsService.postCount(email);
+    var cacheStartTime = performance.now()
+    const value = await this.cacheManager.get('getUsers'+email);
+    if(value){
+      var cacheEndTime = performance.now()
+      console.log({
+        // data: value,
+        timeTaken: `${cacheEndTime - cacheStartTime} milliseconds`,
+        loadsFrom: 'redis cache'
+      })
+      return value
+    }else{
+      var dbStartTime = performance.now()
+      const newValue = await this.postsService.postCount(email);
+      var dbEndTime = performance.now()
+      await this.cacheManager.set('getUsers'+email, newValue);
+      console.log({
+        // data: newValue,
+        timeTaken: `${dbEndTime - dbStartTime} milliseconds`,
+        loadsFrom: 'database'
+      })
+      return newValue
+    }
   }
 
   @Mutation('createUser')
