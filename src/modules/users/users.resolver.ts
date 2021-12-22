@@ -3,19 +3,36 @@ import {Resolver, Query, ResolveField, Args, Parent, Mutation} from '@nestjs/gra
 import { UsersService } from './users.service';
 import { PostsService } from '../posts/posts.service';
 import { CurrentUser } from 'src/auth/auth.resolver';
-import { UseGuards } from '@nestjs/common';
+import { CACHE_MANAGER, Inject, UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/graphql-auth.guard';
+import { Cache } from 'cache-manager'
 
 @Resolver(of => User)
 export class UsersResolver {
   constructor(
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private usersService: UsersService,
     private postsService: PostsService,
   ) {}
 
   @Query()
   async getUsers() {
-    return await this.usersService.findAll();
+    const value = await this.cacheManager.get('getUsers');
+    if(value){
+      console.log({
+        data: value,
+        loadsFrom: 'redis cache'
+      })
+      return value
+    }else{
+      const newValue = await this.usersService.findAll();
+      await this.cacheManager.set('getUsers', newValue);
+      console.log({
+        data: newValue,
+        loadsFrom: 'database'
+      })
+      return newValue
+    }
   }
 
   @Query()

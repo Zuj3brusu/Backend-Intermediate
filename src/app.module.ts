@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -7,6 +7,7 @@ import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './modules/posts/posts.module';
+import * as redisStore from 'cache-manager-redis-store';
 
 @Module({
   imports: [
@@ -18,6 +19,12 @@ import { PostsModule } from './modules/posts/posts.module';
   UsersModule,
   AuthModule,
   PostsModule,
+  CacheModule.register({
+    isGlobal: true,
+    store:redisStore,
+    host: 'localhost',
+    port: 6379
+  })
   ],
   controllers: [AppController],
   providers: [AppService],
