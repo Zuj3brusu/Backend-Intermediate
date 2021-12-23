@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  backendproject:
+    container_name: backendproject
+    image: backendproject
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: yarn run start
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    networks:
+      - webnet
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    container_name: redis
+    image: redis:5
+    networks:
+    - webnet
+
+  postgres:
+    container_name: postgres
+    image: postgres:12
+    networks:
+      - webnet
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_DATABASE}
+      PG_DATA: /data/postgres
+    volumes:
+      - /data/postgres:/data/postgres
+    env_file:
+    - .env
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+
+networks:
+  webnet:
+    driver: bridge
+

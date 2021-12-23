@@ -713,9 +713,9 @@
     semver "^7.3.5"
     tar "^6.1.11"
 
-"@nestjs/cli@^8.0.0":
+"@nestjs/cli@^8.1.6":
   version "8.1.6"
-  resolved "https://registry.npmjs.org/@nestjs/cli/-/cli-8.1.6.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/cli/-/cli-8.1.6.tgz#e624cb292f7758437efd9460ffb3f5c43f776f68"
   integrity sha512-SFz/DNjsxNamBEi00ml6+Qx7DmnljI+lYqNzk/+1WZWCfONmvGxQrUaXcUHulkwMXZF/wpD93rgbbnT1CXirqQ==
   dependencies:
     "@angular-devkit/core" "13.1.1"
