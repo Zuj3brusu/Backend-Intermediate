@@ -2,9 +2,8 @@ FROM node:lts-alpine
 ENV NODE_ENV=development
 WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json*", "yarn.lock" ,"npm-shrinkwrap.json*", "./"]
-RUN npm install -g @nestjs/cli
-RUN yarn install 
-# --development --silent
+RUN yarn global add @nestjs/cli
+RUN yarn install
 RUN mv node_modules ../
 COPY . .
 EXPOSE 3000
