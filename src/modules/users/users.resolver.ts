@@ -127,6 +127,7 @@ export class UsersResolver {
   @Mutation('createUser')
   async create(obj, args: User, context, info): Promise<User> {
     const createdUser = await this.usersService.create(args);
+    await this.cacheManager.reset();
     return createdUser;
   }
 }

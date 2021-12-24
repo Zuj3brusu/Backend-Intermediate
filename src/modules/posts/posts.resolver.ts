@@ -7,11 +7,14 @@ import { User } from '../users/user.entity';
 import { CurrentUser } from 'src/auth/auth.resolver';
 import { Cache } from 'cache-manager'
 import { PostDto } from './dto/post.dto';
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
 
 @Resolver(of => Post)
 export class PostsResolver {
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    @InjectQueue('createPostQueue') private readonly createPostQueue: Queue,
     private postsService: PostsService,
   ) {}
 
@@ -99,6 +102,10 @@ export class PostsResolver {
   @Mutation('createPost')
   async create(@CurrentUser() user: User, @Args('postContent') args: String): Promise<any> {
     const createdPost = await this.postsService.create(user,args);
+    await this.cacheManager.reset();
+    const job = await this.createPostQueue.add('createPostQueue', {
+      queueContent:args,
+    });
     return createdPost;
   }
 }
