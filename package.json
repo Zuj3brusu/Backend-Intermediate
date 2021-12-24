@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/bull": "^0.4.2",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.1.5",
     "@nestjs/core": "^8.0.0",
@@ -30,12 +31,14 @@
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^8.0.0",
     "@types/bcrypt": "^5.0.0",
+    "@types/bull": "^3.15.7",
     "@types/cache-manager": "^3.4.2",
     "@types/passport-jwt": "^3.0.6",
     "@types/passport-local": "^1.0.34",
     "apollo-server-core": "^3.5.0",
     "apollo-server-express": "^3.5.0",
     "bcrypt": "^5.0.1",
+    "bull": "^4.2.0",
     "cache-manager": "^3.6.0",
     "cache-manager-redis-store": "^2.0.0",
     "dotenv": "^10.0.0",

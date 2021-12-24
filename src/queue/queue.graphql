@@ -1,0 +1,14 @@
+type Mutation {
+  postQueue(
+    content : String,
+    ): PostQueue
+}
+
+type Query {
+  getQueue(jobId: Int) : String
+}
+
+
+type PostQueue {
+  jobId: Int
+}

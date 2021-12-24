@@ -8,6 +8,8 @@ import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './modules/posts/posts.module';
 import * as redisStore from 'cache-manager-redis-store';
+import { BullModule } from '@nestjs/bull';
+import { QueueModule } from './queue/queue.module';
 
 @Module({
   imports: [
@@ -25,7 +27,14 @@ import * as redisStore from 'cache-manager-redis-store';
     host: process.env.REDIS_HOST,
     port: 6379,
     ttl: 600,
-  })
+  }),
+  BullModule.forRoot({
+    redis: {
+      host: process.env.REDIS_HOST,
+      port: 6379,
+    },
+  }),
+  QueueModule,
   ],
   controllers: [AppController],
   providers: [AppService],
