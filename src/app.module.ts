@@ -3,13 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseModule } from './database/database.module';
-import { UsersModule } from './modules/users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { PostsModule } from './modules/posts/posts.module';
+import { DatabaseModule } from './common/src/database/database.module';
+import { UsersModule } from './common/src/users/users.module';
+import { AuthModule } from './common/src/auth/auth.module';
+import { PostsModule } from './common/src/posts/posts.module';
 import * as redisStore from 'cache-manager-redis-store';
 import { BullModule } from '@nestjs/bull';
-import { QueueModule } from './queue/queue.module';
+import { QueueModule } from './services/queue/src/queue.module';
 
 @Module({
   imports: [

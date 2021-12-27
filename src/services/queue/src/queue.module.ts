@@ -1,6 +1,6 @@
 import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from 'src/database/database.module';
+import { DatabaseModule } from 'src/common/src/database/database.module';
 import { QueueProcessor } from './queue.processor';
 import { QueueResolver } from './queue.resolver';
 import { QueueService } from './queue.service';

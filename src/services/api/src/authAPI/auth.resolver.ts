@@ -1,9 +1,9 @@
 import { UseGuards, createParamDecorator, ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { GqlExecutionContext, Resolver, Query, ResolveField, Args, Parent, Mutation} from '@nestjs/graphql'
 import { AuthService } from './auth.service';
-import { GqlAuthGuard } from './graphql-auth.guard';
-import { User } from 'src/modules/users/user.entity';
-import { UsersService } from 'src/modules/users/users.service';
+import { GqlAuthGuard } from '../../../../common/src/auth/graphql-auth.guard';
+import { User } from 'src/services/api/src/usersAPI/user.entity';
+import { UsersService } from 'src/services/api/src/usersAPI/users.service';
 
 export const CurrentUser = createParamDecorator(
   (data: unknown, context: ExecutionContext) => {

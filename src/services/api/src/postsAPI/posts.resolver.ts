@@ -2,9 +2,9 @@ import {Post} from './post.entity'
 import {Resolver, Query, ResolveField, Args, Parent, Mutation} from '@nestjs/graphql'
 import { PostsService } from './posts.service';
 import { CACHE_MANAGER, Inject, UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from 'src/auth/graphql-auth.guard';
-import { User } from '../users/user.entity';
-import { CurrentUser } from 'src/auth/auth.resolver';
+import { GqlAuthGuard } from 'src/common/src/auth/graphql-auth.guard';
+import { User } from '../usersAPI/user.entity';
+import { CurrentUser } from 'src/services/api/src/authAPI/auth.resolver';
 import { Cache } from 'cache-manager'
 import { PostDto } from './dto/post.dto';
 import { InjectQueue } from '@nestjs/bull';

@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Post } from 'src/modules/posts/post.entity';
-import { User } from '../modules/users/user.entity';
+import { Post } from 'src/services/api/src/postsAPI/post.entity';
+import { User } from '../../../services/api/src/usersAPI/user.entity';
 
 export const databaseProviders = [
   {

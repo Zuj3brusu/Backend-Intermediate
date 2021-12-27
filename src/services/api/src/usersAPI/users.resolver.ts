@@ -1,10 +1,10 @@
 import {User} from './user.entity'
 import {Resolver, Query, ResolveField, Args, Parent, Mutation} from '@nestjs/graphql'
 import { UsersService } from './users.service';
-import { PostsService } from '../posts/posts.service';
-import { CurrentUser } from 'src/auth/auth.resolver';
+import { PostsService } from '../postsAPI/posts.service';
+import { CurrentUser } from 'src/services/api/src/authAPI/auth.resolver';
 import { CACHE_MANAGER, Inject, UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from 'src/auth/graphql-auth.guard';
+import { GqlAuthGuard } from 'src/common/src/auth/graphql-auth.guard';
 import { Cache } from 'cache-manager'
 
 @Resolver(of => User)

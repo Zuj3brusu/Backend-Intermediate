@@ -1,4 +1,4 @@
-import { User } from './user.entity';
+import { User } from '../../../services/api/src/usersAPI/user.entity';
 
 export const usersProviders = [{
     provide: 'USERS_REPOSITORY',
