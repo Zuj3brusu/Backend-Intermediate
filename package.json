@@ -42,6 +42,7 @@
     "cache-manager": "^3.6.0",
     "cache-manager-redis-store": "^2.0.0",
     "dotenv": "^10.0.0",
+    "express-http-proxy": "^1.6.3",
     "graphql": "^15.8.0",
     "graphql-tools": "^8.2.0",
     "passport": "^0.5.2",
